@@ -1,0 +1,107 @@
+<ion-content [style.background]="'linear-gradient(to bottom right, #B3CFF2, #6A9AD9)'">
+  <div style="max-width: 800px; margin: 0 auto; padding: 24px;">
+    <!-- Header -->
+    <div style="text-align: center; margin-bottom: 32px; padding-top: 32px;">
+      <h1 style="font-size: 36px; font-weight: bold; color: #034AA6; margin-bottom: 8px;">Clima App</h1>
+      <p style="color: #035AA6; font-size: 14px;">Previsão do tempo em tempo real</p>
+    </div>
+
+    <!-- Card de Seleção -->
+    <div
+      style="background: white; border-radius: 16px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); padding: 24px; margin-bottom: 24px;">
+      <label
+        style="text-color: black; display: block; color: #034AA6; font-weight: 600; margin-bottom: 12px; text-align: left;">
+        📍 Escolha uma cidade
+      </label>
+      <ion-select placeholder="Selecione uma cidade" [(ngModel)]="cidadeSelecionada"
+        style="width: 100%; border: 2px solid #B3CFF2; border-radius: 8px;" interface="popover">
+        <ion-select-option *ngFor="let c of cidades" [value]="c">
+          {{ c.nome }}
+        </ion-select-option>
+      </ion-select>
+
+      <button (click)="buscarTempo()"
+        style="width: 100%; margin-top: 16px; background: #034AA6; color: white; font-weight: 600; padding: 12px 24px; border-radius: 8px; border: none; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); cursor: pointer;">
+        🔍 Ver Previsão
+      </button>
+    </div>
+
+    <!-- Card de Clima -->
+    <div *ngIf="dadosTempo"
+      style="background: white; border-radius: 16px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); overflow: hidden;">
+      <!-- Header do Card -->
+      <div [style.background]="'linear-gradient(to right, #034AA6, #035AA6)'"
+        style="color: white; padding: 24px; text-align: center;">
+        <h2 style="font-size: 32px; font-weight: bold; margin-bottom: 4px;">{{ cidadeSelecionada.nome }}</h2>
+        <p style="color: #B3CFF2; text-transform: capitalize; font-size: 18px;">{{
+          dadosTempo.current.weather[0].description }}</p>
+      </div>
+
+      <!-- Temperatura Principal -->
+      <div [style.background]="'linear-gradient(to bottom, #6A9AD9, #B3CFF2)'"
+        style="padding: 32px; text-align: center;">
+        <div style="font-size: 72px; font-weight: bold; color: white; margin-bottom: 8px;">
+          {{ dadosTempo.current.temp | number:'1.0-0' }}°
+        </div>
+        <p style="color: white; font-size: 18px;">Sensação de {{ dadosTempo.current.feels_like | number:'1.0-0' }}°C</p>
+      </div>
+
+      <!-- Sol -->
+      <div
+        style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 24px; background: rgba(179, 207, 242, 0.2);">
+        <div
+          style="text-align: center; padding: 16px; background: white; border-radius: 8px; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);">
+          <div style="font-size: 24px; margin-bottom: 4px;">🌅</div>
+          <p style="color: #889ABF; font-size: 12px; font-weight: 600; margin-bottom: 4px;">Nascer do Sol</p>
+          <p style="color: #034AA6; font-weight: bold;">{{ dadosTempo.current.sunrise * 1000 | date:'HH:mm' }}</p>
+        </div>
+        <div
+          style="text-align: center; padding: 16px; background: white; border-radius: 8px; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);">
+          <div style="font-size: 24px; margin-bottom: 4px;">🌇</div>
+          <p style="color: #889ABF; font-size: 12px; font-weight: 600; margin-bottom: 4px;">Pôr do Sol</p>
+          <p style="color: #034AA6; font-weight: bold;">{{ dadosTempo.current.sunset * 1000 | date:'HH:mm' }}</p>
+        </div>
+      </div>
+
+      <!-- Detalhes do Clima -->
+      <div style="padding: 24px;">
+        <div
+          style="display: flex; align-items: center; justify-content: space-between; padding: 12px; background: rgba(179, 207, 242, 0.3); border-radius: 8px; margin-bottom: 12px;">
+          <span style="color: #035AA6; font-weight: 500;">💧 Umidade</span>
+          <span style="color: #034AA6; font-weight: bold;">{{ dadosTempo.current.humidity }}%</span>
+        </div>
+
+        <div
+          style="display: flex; align-items: center; justify-content: space-between; padding: 12px; background: rgba(179, 207, 242, 0.3); border-radius: 8px; margin-bottom: 12px;">
+          <span style="color: #035AA6; font-weight: 500;">🌡️ Pressão</span>
+          <span style="color: #034AA6; font-weight: bold;">{{ dadosTempo.current.pressure * 0.75 | number:'1.0-0' }}
+            mmHg</span>
+        </div>
+
+        <div
+          style="display: flex; align-items: center; justify-content: space-between; padding: 12px; background: rgba(179, 207, 242, 0.3); border-radius: 8px; margin-bottom: 12px;">
+          <span style="color: #035AA6; font-weight: 500;">💨 Vento</span>
+          <span style="color: #034AA6; font-weight: bold;">{{ dadosTempo.current.wind_speed }} m/s</span>
+        </div>
+
+        <div
+          style="display: flex; align-items: center; justify-content: space-between; padding: 12px; background: rgba(179, 207, 242, 0.3); border-radius: 8px; margin-bottom: 12px;">
+          <span style="color: #035AA6; font-weight: 500;">🧭 Direção</span>
+          <span style="color: #034AA6; font-weight: bold;">{{ dadosTempo.current.wind_deg }}°</span>
+        </div>
+
+        <div
+          style="display: flex; align-items: center; justify-content: space-between; padding: 12px; background: rgba(179, 207, 242, 0.3); border-radius: 8px;">
+          <span style="color: #035AA6; font-weight: 500;">☀️ Índice UV</span>
+          <span style="color: #034AA6; font-weight: bold;">{{ dadosTempo.current.uvi }} UV</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Estado Vazio -->
+    <div *ngIf="!dadosTempo" style="text-align: center; padding: 48px;">
+      <div style="font-size: 64px; margin-bottom: 16px;">🌤️</div>
+      <p style="color: #034AA6; font-size: 18px;">Selecione uma cidade para ver a previsão</p>
+    </div>
+  </div>
+</ion-content>
