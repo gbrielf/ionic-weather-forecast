@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { WeatherData } from '../models/weather.models';
 
 @Injectable({
   providedIn: 'root',
 })
-export class Weather {
-  apiKey = 'e01c6ca40239db7b991e2e1e38541dcd';
+export class WeatherService {
+  private apiUrl: string = environment.apiBaseUrl;
+  private apiKey: string = environment.apiKeyOpenWeather;
 
   constructor(private http: HttpClient){}
-  getWeather(lat: number, lon: number){
-    const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=metric&exclude=hourly&lang=pt_br&appid=${this.apiKey}`;
-    return this.http.get(url);
+
+  getWeather(lat: number, lon: number){  
+    const url = `${this.apiUrl}/onecall?lat=${lat}&lon=${lon}&units=metric&exclude=hourly&lang=pt_br&appid=${this.apiKey}`
+    return this.http.get<WeatherData>(url);
   }
 }

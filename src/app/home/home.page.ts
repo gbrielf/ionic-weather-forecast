@@ -5,10 +5,14 @@ import {
   IonContent, IonSelect, IonSelectOption, 
   IonCardSubtitle, IonCardTitle,
 } from '@ionic/angular/standalone';
-import { Weather } from '../services/weather';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { WeatherCardComponent } from '../components/WeatherCard/WeatherCard';
+import { WeatherData } from '../models/weather.models';
+import { WeatherService } from '../services/weather';
 
+
+// HomePage (Pai): Tem a informação (dadosTempo).
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -16,7 +20,8 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [
     IonContent, IonSelect, IonSelectOption,  
-    IonCardSubtitle, IonCardTitle, CommonModule, FormsModule
+    IonCardSubtitle, IonCardTitle, CommonModule, FormsModule,
+    WeatherCardComponent
   ],
 })
 export class HomePage implements OnInit {
@@ -27,11 +32,11 @@ export class HomePage implements OnInit {
     { nome: 'Lisboa', lat: 38.7223, lon: -9.1393 }
   ];
 
-  dadosTempo: any;
+  dadosTempo!: WeatherData;
   cidadeSelecionada: any;
   carregado: boolean = false;
 
-  constructor(private weatherService: Weather) {}
+  constructor(private weather: WeatherService) {}
 
   async ngOnInit() {
     const { value } = await Preferences.get({ key: 'ultimaCidade' });
@@ -91,7 +96,7 @@ export class HomePage implements OnInit {
 
     const { lat, lon } = this.cidadeSelecionada;
 
-    this.weatherService.getWeather(lat, lon).subscribe({
+    this.weather.getWeather(lat, lon).subscribe({
       next: (res: any) => {
         this.dadosTempo = res;
         // Se pegamos pelo GPS, a API nos diz o nome real da cidade
