@@ -26,28 +26,68 @@ A arquitetura de uma aplicação Ionic bem estruturada segue uma organização e
 
 A aplicação é dividida em camadas que trabalham conjuntamente para renderizar a interface e processar dados:
 
-#### - Pages & Components (Camada de Apresentação)
+#### Pages & Components (Camada de Apresentação)
 
 A camada de **Pages** representa as telas da aplicação (Rotas). Ela é responsável por renderizar o HTML (usando componentes Ionic como `<ion-content>`, `<ion-list>`), capturar eventos do usuário e exibir dados. Os **Components** são pedaços reutilizáveis de UI isolados. Esta camada deve ser "burra", focada apenas em mostrar dados e despachar ações, sem conter regras de negócio complexas.
 
-#### - Services/Hooks (Lógica de Negócio e Estado)
+#### Services/Hooks (Lógica de Negócio e Estado)
 
 A camada de **Service** (no Angular) ou **Hooks/Context** (no React) concentra a lógica da aplicação. Ela gerencia o estado da aplicação, processa regras de negócio e decide quando buscar ou salvar dados. Os componentes da camada de apresentação consomem esses serviços para reagir a mudanças de estado ou solicitar operações.
 
-#### - Models/Interfaces (Modelo de Dados)
+#### Models/Interfaces (Modelo de Dados)
 
 A camada de **Interfaces** (geralmente usando TypeScript) define o contrato dos dados. Ela modela os objetos que trafegam na aplicação (ex: `User`, `Product`, `AuthResponse`). O uso de tipagem forte aqui garante que tanto a UI quanto os serviços falem a mesma língua e evita erros em tempo de execução.
 
-#### - Data Providers & API (Acesso a Dados)
+#### Data Providers & API (Acesso a Dados)
 
 Esta camada encapsula as chamadas HTTP (via `fetch` ou `axios`) ou acesso a armazenamento local (via `Ionic Storage` ou SQLite). Ela atua como um repositório, isolando a aplicação de detalhes de implementação da API externa. É aqui que os DTOs recebidos do backend são convertidos para os Modelos internos da aplicação.
 
-#### - Capacitor Plugins (Camada Nativa)
+#### Capacitor Plugins (Camada Nativa)
 
 A camada de **Plugins** é a ponte para o dispositivo. Quando a aplicação precisa tirar uma foto ou obter a geolocalização, ela não acessa o hardware diretamente; ela chama um Plugin do Capacitor. O Plugin traduz a chamada JavaScript para código nativo (Swift/Java) e devolve o resultado para a aplicação web.
 
-<img src="[https://ionicframework.com/docs/assets/icons/logo-react-icon.png](https://www.google.com/search?q=https://ionicframework.com/docs/assets/icons/logo-react-icon.png)" alt="ionic architecture placeholder" width="100">
+<img src="https://ionicframework.com/docs/assets/icons/logo-react-icon.png" alt="ionic architecture placeholder" width="100" />
+
 *(Imagem ilustrativa de estrutura de projeto Ionic)*
+
+## Estrutura do Projeto
+
+Uma aplicação Ionic segue uma estrutura de diretórios opinativa que favorece a escalabilidade. Abaixo, detalhamos as principais estruturas criadas neste projeto e suas responsabilidades:
+
+### Organização de Pastas
+
+```plaintext
+/
+├── public/              # Assets estáticos (ícones, imagens, manifest.json)
+├── src/
+│   ├── components/      # Componentes de UI reutilizáveis (botões, cards)
+│   ├── pages/           # Telas da aplicação (cada rota é uma página)
+│   ├── services/        # Lógica de comunicação com APIs e Backend
+│   ├── theme/           # Variáveis globais de CSS e customização de cores
+│   ├── environments/    # Configurações de variáveis de ambiente
+│   ├── App.tsx          # Componente raiz e roteamento principal
+│   └── main.tsx         # Ponto de entrada da aplicação
+├── ionic.config.json    # Configurações do CLI do Ionic
+└── capacitor.config.ts  # Configurações nativas (nome do app, ID do pacote)
+```
+
+### Gerenciamento de Ambientes (Environments)
+
+Assim como em frameworks de backend, o Ionic permite configurar diferentes comportamentos para Desenvolvimento e Produção. A pasta `environments` (ou arquivos `.env` em projetos React/Vite) é crucial para gerenciar segredos e URLs de API sem hard-coding.
+
+* **environment.ts (Dev):** Utilizado durante o desenvolvimento local (`ionic serve`). Aponta para servidores locais (ex: `http://localhost:8080`) e habilita logs detalhados (Debug).
+
+* **environment.prod.ts (Prod):** Utilizado na compilação final para as lojas (`ionic build --prod`). Aponta para a API real na nuvem (AWS/Render) e desativa ferramentas de debug para otimizar performance.
+
+#### Exemplo de uso
+
+```ts
+export const environment = {
+  production: true,
+  apiUrl: 'https://api.promolize.com.br', // URL configurada na AWS
+  version: '1.0.2'
+};
+```
 
 ## Princípios de Design no Ionic
 
@@ -70,11 +110,11 @@ Plugins são instalados via NPM, integrando-se perfeitamente ao fluxo de trabalh
 
 ## Comparativo com Outros Frameworks
 
-| Framework | Base Tecnológica | Renderização | Performance | Foco | Ecossistema | Curva de Aprendizado |
-| --- | --- | --- | --- | --- | --- | --- |
-| **Ionic** | Web (HTML/CSS/JS) | WebView (DOM) | Boa (perto do nativo) | Web Devs, Cross-platform | Gigante (NPM + Web) | Baixa (Se souber Web) |
-| **React Native** | React (JS/TS) | Componentes Nativos | Muito Boa | JS Devs, "Look and feel" | Muito Grande | Moderada |
-| **Flutter** | Dart | Engine Própria (Skia/Impeller) | Excelente (Nativo) | Alta Performance, UI Custom | Em crescimento | Alta (Nova linguagem) |
+| Framework        | Base Tecnológica  | Renderização                   | Performance           | Foco                        | Ecossistema         | Curva de Aprendizado  |
+| ---------------- | ----------------- | ------------------------------ | --------------------- | --------------------------- | ------------------- | --------------------- |
+| **Ionic**        | Web (HTML/CSS/JS) | WebView (DOM)                  | Boa (perto do nativo) | Web Devs, Cross-platform    | Gigante (NPM + Web) | Baixa (Se souber Web) |
+| **React Native** | React (JS/TS)     | Componentes Nativos            | Muito Boa             | JS Devs, "Look and feel"    | Muito Grande        | Moderada              |
+| **Flutter**      | Dart              | Engine Própria (Skia/Impeller) | Excelente (Nativo)    | Alta Performance, UI Custom | Em crescimento      | Alta (Nova linguagem) |
 
 ### Detalhes
 
@@ -85,7 +125,7 @@ Plugins são instalados via NPM, integrando-se perfeitamente ao fluxo de trabalh
 Esta tabela é construída com base em análises de mercado como:
 
 * [https://ionic.io/resources/articles/ionic-vs-react-native-a-comparison-guide](https://ionic.io/resources/articles/ionic-vs-react-native-a-comparison-guide)
-* [https://blog.logrocket.com/flutter-vs-react-native-vs-ionic/](https://www.google.com/search?q=https://blog.logrocket.com/flutter-vs-react-native-vs-ionic/)
+* [https://blog.logrocket.com/flutter-vs-react-native-vs-ionic/](https://blog.logrocket.com/flutter-vs-react-native-vs-ionic/)
 
 ## Melhores Práticas com Ionic
 
@@ -103,7 +143,6 @@ Para iniciar, você precisa do Node.js instalado. Instale a CLI globalmente via 
 
 ```bash
 npm install -g @ionic/cli
-
 ```
 
 ### Passo 2 — Criar o Projeto Inicial
@@ -113,7 +152,6 @@ No terminal, crie seu projeto Ionic. O assistente perguntará qual framework des
 ```bash
 ionic start meuApp tabs --type=react
 cd meuApp
-
 ```
 
 *(O template `tabs` já cria um app com navegação por abas inferior).*
@@ -124,14 +162,12 @@ Para rodar a aplicação em modo desenvolvimento no navegador:
 
 ```bash
 ionic serve
-
 ```
 
 Sua aplicação Ionic abrirá automaticamente em:
 
 ```
 http://localhost:8100
-
 ```
 
 ### Passo 4 — Live Coding (Hot Reload)
@@ -153,8 +189,8 @@ const Tab1: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen>
         <div style={{ padding: 20 }}>
-            <h2>Olá, Ionic!</h2>
-            <p>Editando em tempo real.</p>
+          <h2>Olá, Ionic!</h2>
+          <p>Editando em tempo real.</p>
         </div>
       </IonContent>
     </IonPage>
@@ -162,7 +198,6 @@ const Tab1: React.FC = () => {
 };
 
 export default Tab1;
-
 ```
 
 Altere o texto `"Olá, Ionic!"` para `"Seminário Ionic Framework"`. Salve o arquivo e observe o navegador atualizar instantaneamente, mantendo o estado da aplicação.
@@ -173,8 +208,8 @@ Esse fluxo demonstra a agilidade do desenvolvimento híbrido: você constrói to
 
 ## Material de Apoio
 
-* [Documentação oficial do Ionic](https://ionicframework.com/docs)
-* [Documentação do Capacitor](https://capacitorjs.com/docs)
-* [Ionic Academy (Tutoriais)](https://ionicacademy.com/)
-* [Guia Ionic vs Outros — Josh Morony (inglês)](https://www.google.com/search?q=https://www.joshmorony.com/)
-* [Ionic GitHub Repository](https://github.com/ionic-team/ionic-framework)
+* [https://ionicframework.com/docs](https://ionicframework.com/docs)
+* [https://capacitorjs.com/docs](https://capacitorjs.com/docs)
+* [https://ionicacademy.com/](https://ionicacademy.com/)
+* [https://www.joshmorony.com/](https://www.joshmorony.com/)
+* [https://github.com/ionic-team/ionic-framework](https://github.com/ionic-team/ionic-framework)
