@@ -1,7 +1,3 @@
-Aqui está o `README.md` adaptado para o **Ionic**, mantendo rigorosamente a estrutura, o tom e o nível de detalhamento do modelo Quarkus que você enviou.
-
----
-
 # Ionic Framework
 
 ## Introdução
