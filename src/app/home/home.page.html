@@ -1,23 +1,28 @@
-<ion-content [style.background]="'linear-gradient(to bottom right, #B3CFF2, #6A9AD9)'">
-  <div style="max-width: 800px; margin: 0 auto; padding: 24px;">
+<ion-content>
+  <!-- style="max-width: 800px; margin: 0 auto; padding: 24px;" -->
+  <div class="max-w-3xl m-0 p-6" >
     <!-- Header -->
-    <div style="text-align: center; margin-bottom: 32px; padding-top: 32px;">
-      <h1 style="font-size: 36px; font-weight: bold; color: #034AA6; margin-bottom: 8px;">Clima App</h1>
-      <p style="color: #035AA6; font-size: 14px;">Previsão do tempo em tempo real</p>
+    <!-- style="text-align: center; margin-bottom: 32px; padding-top: 32px;" -->
+    <div class="text-center mb-8 pt-8" >
+      <!-- style="font-size: 36px; font-weight: bold; color: #034AA6; margin-bottom: 8px;" -->
+      <h1 class="text-4xl font-bold text-[#034AA6] mb-2">Clima App</h1>
+      <!-- style="color: #035AA6; font-size: 14px;" -->
+      <p class="text-[#035AA6] text-sm">Previsão do tempo em tempo real</p>
     </div>
 
     <!-- Card de Seleção -->
-    <div
-      style="background: white; border-radius: 16px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); padding: 24px; margin-bottom: 24px;">
+    <!-- style="background: white; border-radius: 16px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); padding: 24px; margin-bottom: 24px;" -->
+    <div class="bg-white rounded-2xl p-6 mb-6"
+      >
       <ion-select label="📍 Escolha uma cidade" label-placement="stacked" placeholder="Selecione uma cidade"
         [(ngModel)]="cidadeSelecionada" (ionChange)="buscarTempo()" interface="alert">
         <ion-select-option *ngFor="let c of cidades" [value]="c">
           {{ c.nome }}
         </ion-select-option>
       </ion-select>
-
-      <button (click)="buscarTempo()"
-        style="width: 100%; margin-top: 16px; background: #034AA6; color: white; font-weight: 600; padding: 12px 24px; border-radius: 8px; border: none; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); cursor: pointer;">
+      <!-- style="width: 100%; margin-top: 16px; background: #034AA6; color: white; font-weight: 600; padding: 12px 24px; border-radius: 8px; border: none; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); cursor: pointer;" -->
+      <button (click)="buscarTempo()" class="w-full mt-4 bg-[#034AA6] text-white font-semibold py-3 px-6 rounded-lg border-none cursor-pointer"
+        >
         🔍 Ver Previsão
       </button>
     </div>
@@ -26,9 +31,12 @@
     </app-weather-card>
 
     <!-- Estado Vazio -->
-    <div *ngIf="!dadosTempo" style="text-align: center; padding: 48px;">
-      <div style="font-size: 64px; margin-bottom: 16px;">🌤️</div>
-      <p style="color: #034AA6; font-size: 18px;">Selecione uma cidade para ver a previsão</p>
+    <!-- style="text-align: center; padding: 48px;" -->
+    <div *ngIf="!dadosTempo" class="align-center p-12">
+      <!-- style="font-size: 64px; margin-bottom: 16px;" -->
+      <div class="text-6xl mb-4">🌤️</div>
+      <!-- style="color: #034AA6; font-size: 18px;" -->
+      <p class="text-[#034aa6] text-lg">Selecione uma cidade para ver a previsão</p>
     </div>
   </div>
 </ion-content>
