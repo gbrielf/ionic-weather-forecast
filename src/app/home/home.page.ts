@@ -13,14 +13,14 @@ import { WeatherData } from '../models/weather.models';
 @Component({
   selector: 'app-home',
   standalone: true,
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
     WeatherCardComponent
   ],
+  templateUrl: '/home.page.html',
+  styleUrls: ['/home.page.scss'],
 })
 export class HomePage implements OnInit {
   cidades = [
