@@ -19,8 +19,8 @@ import { WeatherData } from '../models/weather.models';
     FormsModule,
     WeatherCardComponent
   ],
-  templateUrl: '/home.page.html',
-  styleUrls: ['/home.page.scss'],
+  templateUrl: 'home.page.html',
+  styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
   cidades = [
