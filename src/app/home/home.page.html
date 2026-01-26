@@ -1,22 +1,22 @@
-<ion-content>
+<ion-content class="bg-white">
   <!-- style="max-width: 800px; margin: 0 auto; padding: 24px;" -->
-  <div class="max-w-3xl m-0 p-6" >
+  <div class="max-w-3xl mx-auto p-6" >
     <!-- Header -->
     <!-- style="text-align: center; margin-bottom: 32px; padding-top: 32px;" -->
     <div class="text-center mb-8 pt-8" >
       <!-- style="font-size: 36px; font-weight: bold; color: #034AA6; margin-bottom: 8px;" -->
-      <h1 class="text-4xl font-bold text-[#034AA6] mb-2">Clima App</h1>
+      <h1 class="text-4xl font-bold text-black mb-2">Clima App</h1>
       <!-- style="color: #035AA6; font-size: 14px;" -->
-      <p class="text-[#035AA6] text-sm">Previsão do tempo em tempo real</p>
+      <p class="text-black text-sm">Previsão do tempo em tempo real</p>
     </div>
 
     <!-- Card de Seleção -->
     <!-- style="background: white; border-radius: 16px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); padding: 24px; margin-bottom: 24px;" -->
-    <div class="bg-white rounded-2xl p-6 mb-6"
+    <div class="bg-white rounded-2xl p-6 mb-6 text-black"
       >
-      <ion-select label="📍 Escolha uma cidade" label-placement="stacked" placeholder="Selecione uma cidade"
+      <ion-select name="cidade" class="text-black placeholder-black w-full" label="📍 Escolha uma cidade" label-placement="stacked" placeholder="Selecione uma cidade"
         [(ngModel)]="cidadeSelecionada" (ionChange)="buscarTempo()" interface="alert">
-        <ion-select-option *ngFor="let c of cidades" [value]="c">
+        <ion-select-option class="text-black" *ngFor="let c of cidades" [value]="c">
           {{ c.nome }}
         </ion-select-option>
       </ion-select>
@@ -32,11 +32,11 @@
 
     <!-- Estado Vazio -->
     <!-- style="text-align: center; padding: 48px;" -->
-    <div *ngIf="!dadosTempo" class="align-center p-12">
+    <div *ngIf="!dadosTempo" class="text-center p-12">
       <!-- style="font-size: 64px; margin-bottom: 16px;" -->
       <div class="text-6xl mb-4">🌤️</div>
       <!-- style="color: #034AA6; font-size: 18px;" -->
-      <p class="text-[#034aa6] text-lg">Selecione uma cidade para ver a previsão</p>
+      <p class="text-black text-lg">Selecione uma cidade para ver a previsão</p>
     </div>
   </div>
 </ion-content>

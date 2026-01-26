@@ -1,3 +1,4 @@
+/* Estilos antigos do container comentados - não são mais necessários
 #container {
   text-align: center;
 
@@ -25,8 +26,36 @@
 #container a {
   text-decoration: none;
 }
+*/
 
-/* Garante que o ion-content não sobreponha o conteúdo */
+/* Garante que o ion-content tenha fundo branco */
 ion-content {
-  --background: transparent;
+  --background: #f5f5f5;
+}
+
+/* Força cores pretas para o select e seus elementos internos */
+ion-select {
+  --color: #000000;
+  --placeholder-color: #000000;
+  --placeholder-opacity: 1;
+  color: #000000;
+  font-weight: bold;
+}
+
+ion-select::part(text) {
+  color: #000000;
+}
+
+ion-select::part(placeholder) {
+  color: #404040;
+}
+
+ion-select::part(icon) {
+  color: #000000;
+  opacity: 1;
+}
+
+/* Força a cor do label flutuante (se houver, dependendo da versão do Ionic) */
+ion-select::part(label) {
+  color: #000000;
 }
