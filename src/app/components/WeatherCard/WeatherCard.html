@@ -15,7 +15,7 @@
 
     <!-- Temperatura Principal -->
     <div  class="p-8 text-center">
-        <div class="text-7xl font-bold text-white mb-2;">
+        <div class="text-7xl font-bold text-white mb-2">
             {{ weatherData.current.temp | number:'1.0-0' }}°
         </div>
         <p class="text-white text-lg;">Sensação de {{ weatherData.current.feels_like | number:'1.0-0' }}°C</p>
@@ -26,7 +26,7 @@
         class="grid grid-cols-[1fr_1fr] gap-4 p-6 bg-[rgba(179, 207, 242, 0.2)]">
         <div
             class="text-center p-4 bg-white rounded-lg">
-            <div class="text-2xl mb-1;">🌅</div>
+            <div class="text-2xl mb-1">🌅</div>
             <p class="text-[#889ABF] text-xs font-semibold mb-1">Nascer do Sol</p>
             <p class="text-[#034AA6] font-bold">{{ weatherData.current.sunrise | toSeconds | date:'HH:mm' }}</p>
         </div>
@@ -43,32 +43,32 @@
         <div
             class="flex align-center justify-between p-3 rounded-lg mb-3">
             <span class="text-[#035AA6] font-regular">💧 Umidade</span>
-            <span class="text-[#035AA6] font-bold;">{{ weatherData.current.humidity }}%</span>
+            <span class="text-[#035AA6] font-bold">{{ weatherData.current.humidity }}%</span>
         </div>
 
         <div
             class="flex items-center justify-between p-3 rounded-lg mb-3">
-            <span class="text-[#035AA6] font-regular;">🌡️ Pressão</span>
-            <span class="text-[#035AA6] font-bold;">{{ weatherData.current.pressure | pressure | number:'1.0-0' }}
+            <span class="text-[#035AA6] font-regular">🌡️ Pressão</span>
+            <span class="text-[#035AA6] font-bold">{{ weatherData.current.pressure | pressure | number:'1.0-0' }}
                 mmHg</span>
         </div>
 
         <div
             class="flex items-center justify-between p-3 rounded-lg mb-3">
-            <span class="text-[#035AA6] font-regular;">💨 Vento</span>
+            <span class="text-[#035AA6] font-regular">💨 Vento</span>
             <span class="text-[#035AA6] font-bold;">{{ weatherData.current.wind_speed }} m/s</span>
         </div>
 
         <div
             class="flex items-center justify-between p-3 rounded-lg mb-3">
-            <span class="text-[#035AA6] font-regular;">🧭 Direção</span>
+            <span class="text-[#035AA6] font-regular">🧭 Direção</span>
             <span class="text-[#035AA6] font-bold;">{{ weatherData.current.wind_deg }}°</span>
         </div>
 
         <div
-            class="flex items-center justify-between p-3 rounded-lg mb-3 text">
-            <span class="#035AA6; font-weight: 500;">☀️ Índice UV</span>
-            <span class="text-[#035AA6] font-bold;">{{ weatherData.current.uvi }} UV</span>
+            class="flex items-center justify-between p-3 rounded-lg mb-3">
+            <span class="text-[#035AA6] font-regular">☀️ Índice UV</span>
+            <span class="text-[#035AA6] font-bold">{{ weatherData.current.uvi }} UV</span>
         </div>
     </div>
 </div>
