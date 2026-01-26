@@ -14,9 +14,15 @@
     <!-- style="background: white; border-radius: 16px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); padding: 24px; margin-bottom: 24px;" -->
     <div class="bg-white rounded-2xl p-6 mb-6 text-black"
       >
-      <ion-select name="cidade" class="text-black placeholder-black w-full" label="📍 Escolha uma cidade" label-placement="stacked" placeholder="Selecione uma cidade"
-        [(ngModel)]="cidadeSelecionada" (ionChange)="buscarTempo()" interface="alert">
-        <ion-select-option class="text-black" *ngFor="let c of cidades" [value]="c">
+      <ion-select 
+      interface="popover" 
+      name="cidade" class="text-black placeholder-black w-full" placeholder="Selecione uma cidade"
+      [(ngModel)]="cidadeSelecionada" 
+      (ionChange)="buscarTempo()" 
+      >
+        <ion-select-option 
+        *ngFor="let cidade of cidades" 
+        [value]="cidade">
           {{ c.nome }}
         </ion-select-option>
       </ion-select>
