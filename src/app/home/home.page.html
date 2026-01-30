@@ -23,7 +23,7 @@
         <ion-select-option 
         *ngFor="let cidade of cidades" 
         [value]="cidade">
-          {{ c.nome }}
+          {{ cidade.nome }}
         </ion-select-option>
       </ion-select>
       <!-- style="width: 100%; margin-top: 16px; background: #034AA6; color: white; font-weight: 600; padding: 12px 24px; border-radius: 8px; border: none; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); cursor: pointer;" -->
@@ -31,6 +31,10 @@
         >
         🔍 Ver Previsão
       </button>
+      <ion-button (click)="obterLocalizacaoAtual()">
+        <ion-icon name="location" slot="start"></ion-icon>
+        Usar Minha Localização Atual
+      </ion-button> 
     </div>
 
     <app-weather-card *ngIf="carregado && dadosTempo" [weatherData]="dadosTempo" [cidadeNome]="cidadeSelecionada?.nome">

@@ -44,6 +44,25 @@ export class HomePage implements OnInit {
     }
   }
 
+  // Método para obter localização atual
+  async obterLocalizacaoAtual() {
+    try {
+      // Solicita permissão e obtém coordenadas
+      const coordinates = await Geolocation.getCurrentPosition();
+      
+      this.cidadeSelecionada = {
+        nome: 'Localização Atual',
+        lat: coordinates.coords.latitude,
+        lon: coordinates.coords.longitude
+      };
+
+      this.buscarTempo();
+    } catch (error) {
+      console.error('Erro ao obter localização:', error);
+      // Aqui você pode mostrar um alerta para o usuário
+    }
+  }
+
   async buscarTempo() {
     if (!this.cidadeSelecionada) return;
 
